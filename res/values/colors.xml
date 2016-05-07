@@ -1,0 +1,10 @@
+<resources>
+    
+    <color name="stay_color">#eeeeee</color>
+    <color name="red">#FFC93437</color>
+    <color name="blue">#FF375BF1</color>
+    <color name="yellow">#FFF7D23E</color>
+    <color name="green">#FF34A350</color>
+    <color name="fragment_bg">#66c0c0c0</color>
+
+</resources>
