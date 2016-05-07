@@ -1,7 +1,8 @@
 写此项目的**[目的]()**：
 > 1. 很喜欢Twitter的标题栏，想模仿一下。
 > 2. 对微信的导航图标颜色渐变很好奇，想实现一下。
-> 3. 想练习`ViewPager + Fragment`、 `RecyclerView`、 `SwipeRefreshLayout`、 `CardView`、 `Volly`、 `Glide`、 `retrofit` 的使用。
+> 3. 想练习`ViewPager + Fragment`、 `RecyclerView`、 
+    `SwipeRefreshLayout`、 `CardView`、 `Volley`、 `Glide`、 `retrofit` 的使用。
 
 <image src="/screenshot/1.jpg"/>
 <image src="/screenshot/2.jpg"/>
