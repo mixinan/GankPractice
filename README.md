@@ -3,12 +3,8 @@
 > 2. 对微信的导航图标颜色渐变很好奇，想实现一下。
 > 3. 想练习`ViewPager + Fragment`、 `RecyclerView`、 `SwipeRefreshLayout`、 `CardView`、 `Volly`、 `Glide`、 `retrofit` 的使用。
 
-<image src="/screenshots/2.png"/>
-<image src="/screenshots/1.png"/>
-
-----------
-
-<image src="/screenshots/3.gif"/>
+<image src="/screenshot/1.jpg"/>
+<image src="/screenshot/2.jpg"/>
 
 感谢**[代码家]()**的**[干货集中营](http://gank.io/api)**免费提供数据服务。
 
