@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,10 +19,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import cc.guoxingnan.wmgank.ImageGalleryActivity;
 import cc.guoxingnan.wmgank.R;
-import cc.guoxingnan.wmgank.adapter.WelfareRecyclerViewAdapter;
-import cc.guoxingnan.wmgank.adapter.WelfareRecyclerViewAdapter.OnItemClickListener;
+import cc.guoxingnan.wmgank.adapter.WelfareAdapter;
+import cc.guoxingnan.wmgank.adapter.WelfareAdapter.OnItemClickListener;
 import cc.guoxingnan.wmgank.entity.Girl;
 import cc.guoxingnan.wmgank.view.SpacesItemDecoration;
+import cc.guoxingnan.wmgank.view.UpRefreshRecyclerView;
+import cc.guoxingnan.wmgank.view.UpRefreshRecyclerView.UpRefreshListener;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
@@ -33,12 +34,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 
-public class WelfareFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class WelfareFragment extends Fragment implements UpRefreshListener,SwipeRefreshLayout.OnRefreshListener{
 
 	private static WelfareFragment mWelfareFragment;
 	private Context mContext;
-	private RecyclerView mRecyclerView;
-	private WelfareRecyclerViewAdapter adapter;
+	private UpRefreshRecyclerView mRecyclerView;
+	private WelfareAdapter adapter;
 	private SwipeRefreshLayout mSwipeRefreshLayout;
 	private ArrayList<Girl> girls;
 	private int page = 1;
@@ -60,12 +61,12 @@ public class WelfareFragment extends Fragment implements SwipeRefreshLayout.OnRe
 		mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_view);
 		mSwipeRefreshLayout.setColorSchemeResources(R.color.red, R.color.blue, R.color.yellow, R.color.green);
 
-		mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_welfare);
+		mRecyclerView = (UpRefreshRecyclerView) view.findViewById(R.id.rv_welfare);
 		StaggeredGridLayoutManager layoutManager= new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 		mRecyclerView.setLayoutManager(layoutManager);
 
 		girls = new ArrayList<Girl>();
-		adapter = new WelfareRecyclerViewAdapter(mContext, girls);
+		adapter = new WelfareAdapter(mContext, girls);
 		mRecyclerView.setAdapter(adapter);
 
 		//设置item之间的间隔
@@ -108,12 +109,13 @@ public class WelfareFragment extends Fragment implements SwipeRefreshLayout.OnRe
 				page = 1;
 				getData(page);
 			}
-		}, 300);
+		}, 1000);
 
 	}
 
 	private void initListener() {
 		mSwipeRefreshLayout.setOnRefreshListener(this);
+		mRecyclerView.setUpRefreshListener(this);
 	}
 
 
@@ -125,8 +127,14 @@ public class WelfareFragment extends Fragment implements SwipeRefreshLayout.OnRe
 			@Override
 			public void onResponse(String response) {
 				try {
-					girls = parseGirls(response);
-					adapter.update(girls);
+					if (page == 1) {
+	                    girls.clear();
+	                }
+					girls.addAll(parseGirls(response));
+					adapter.notifyDataSetChanged();
+					
+					//更新界面布局
+					mRecyclerView.onRefreshFinish();
 					mSwipeRefreshLayout.setRefreshing(false);
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -138,6 +146,8 @@ public class WelfareFragment extends Fragment implements SwipeRefreshLayout.OnRe
 			@Override
 			public void onErrorResponse(VolleyError error) {
 				Log.e("Error", error.getMessage(), error);
+				//更新界面布局：取消刷新动画
+				mRecyclerView.onRefreshFinish();
 				mSwipeRefreshLayout.setRefreshing(false);
 			}
 		});
@@ -165,7 +175,15 @@ public class WelfareFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 	@Override
 	public void onRefresh() {
-		page ++;
+		page = 1;
 		getData(page);
+	}
+
+
+	@Override
+	public void onUpRefresh() {
+		mSwipeRefreshLayout.setRefreshing(true);
+		page++;
+        getData(page);
 	}
 }
