@@ -7,9 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import cc.guoxingnan.wmgank.R;
 import cc.guoxingnan.wmgank.adapter.AndroidAdapter.AndroidViewHolder;
@@ -94,5 +94,16 @@ public class AndroidAdapter extends Adapter<AndroidViewHolder> {
 	public void setOnItemClickListener(OnItemClickListener onItemClickListener){
 		this.listener = onItemClickListener;
 	}
+	
+	
+	public void addData(int position){
+        data.add(position,new Android("2016-01-01","http://guoxingnan.cc","时间宝贵-选择很重要"));        
+        notifyItemInserted(position);
+    }
+
+    public void removeData(int position){
+    	data.remove(position);
+        notifyItemRemoved(position);
+    }
 
 }

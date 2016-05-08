@@ -90,6 +90,8 @@ public class AndroidFragment extends Fragment implements UpRefreshListener,Swipe
 
 			@Override
 			public void onItemLongClick(View view, int position) {
+				adapter.addData(position);
+				adapter.removeData(position+1);
 			}
 
 			@Override

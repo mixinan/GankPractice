@@ -10,6 +10,16 @@ public class Android {
 	public Android() {
 		super();
 	}
+	
+	
+	public Android(String time, String url, String desc) {
+		super();
+		this.time = time;
+		this.url = url;
+		this.desc = desc;
+	}
+
+
 	public Android(String time, String from, String url, String who, String desc) {
 		super();
 		this.time = time;
