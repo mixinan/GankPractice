@@ -196,7 +196,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener, O
 
 		case R.id.action_scan:
 			//	TODO
-			Toast.makeText(this, "扫一扫", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "即将完善该功能", Toast.LENGTH_SHORT).show();
 			break;
 			
 		case R.id.action_qq:

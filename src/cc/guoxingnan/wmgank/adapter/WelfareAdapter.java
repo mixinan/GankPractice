@@ -30,7 +30,7 @@ public class WelfareAdapter extends RecyclerView.Adapter<WelfareAdapter.ViewHold
 
 	@Override
 	public WelfareAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View view = LayoutInflater.from(mContext).inflate(R.layout.welfare_item, parent, false);
+		View view = LayoutInflater.from(mContext).inflate(R.layout.item_welfare, parent, false);
 		return new ViewHolder(view);
 	}
 

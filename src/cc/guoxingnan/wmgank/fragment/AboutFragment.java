@@ -20,8 +20,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
     private TextView tvVersion;
     private TextView tvDaiMaJia;
     private TextView tvGank;
-    private TextView tvDrakeet;
-    private TextView tvMeiZi;
     private TextView tvSatan;
 
     @Override
@@ -40,8 +38,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         tvVersion = (TextView) view.findViewById(R.id.tv_version);
         tvDaiMaJia = (TextView) view.findViewById(R.id.tv_daimajia);
         tvGank = (TextView) view.findViewById(R.id.tv_gank);
-        tvDrakeet = (TextView) view.findViewById(R.id.tv_drakeet);
-        tvMeiZi = (TextView) view.findViewById(R.id.tv_meizi);
         tvSatan = (TextView) view.findViewById(R.id.tv_satan);
     }
 
@@ -57,8 +53,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
     private void initListener() {
         tvDaiMaJia.setOnClickListener(this);
         tvGank.setOnClickListener(this);
-        tvDrakeet.setOnClickListener(this);
-        tvMeiZi.setOnClickListener(this);
         tvSatan.setOnClickListener(this);
     }
 
@@ -84,17 +78,9 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
             	desc = mContext.getResources().getString(R.string.gank);
             	url = "http://gank.io";
                 break;
-            case R.id.tv_drakeet:
-            	desc = mContext.getResources().getString(R.string.drakeet);
-            	url = "https://github.com/drakeet";
-                break;
-            case R.id.tv_meizi:
-            	desc = mContext.getResources().getString(R.string.meizi);
-            	url = "https://github.com/drakeet/Meizhi";
-                break;
             case R.id.tv_satan:
-            	desc = "ÎÒµÄGitHub";
-            	url = mContext.getResources().getString(R.string.github);
+            	desc = mContext.getResources().getString(R.string.satan);
+            	url = "https://github.com/wenjue";
                 break;
         }
         

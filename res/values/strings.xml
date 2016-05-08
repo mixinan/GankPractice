@@ -20,16 +20,11 @@
     <string name="drawer_close">关闭</string>
     <string name="name">万码千钧</string>
     <string name="github">https://github.com/mixinan</string>
-    <string name="new_data">每日一干</string>
-    <string name="type_data">分类干货</string>
-    <string name="random_data">随机干货</string>
     <string name="about">关于</string>
     <string name="back">再按一次退出</string>
     <string name="daimajia"><u>代码家</u></string>
     <string name="gank"><u>干货集中营</u></string>
-    <string name="drakeet"><u>drakeet</u></string>
-    <string name="meizi"><u>妹子.gank.io</u></string>
-    <string name="my_github"><u>我的GitHub</u></string>
+    <string name="satan"><u>Satan</u></string>
     <string name="top">返回顶部</string>
     
     <array name="type">

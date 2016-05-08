@@ -82,8 +82,6 @@ public class WelfareFragment extends Fragment implements UpRefreshListener,Swipe
 				//替换当前图片为志玲
 				adapter.addData(position);
 				adapter.removeData(position+1);
-//				adapter.notifyDataSetChanged();
-//				Toast.makeText(mContext, "志玲占据了第 "+(position+1)+" 个位置", Toast.LENGTH_SHORT).show();
 			}
 
 			@Override

@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="48dp"
-                android:src="@drawable/btn_star_big_off" />
+                android:src="@drawable/wujiao1" />
 
             <TextView
                 android:id="@+id/tv_app_name"
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="本应用所有的数据均来自干货集中营，感谢“代码家”以及”干货集中营“的所有编辑们的无私奉献。"
+                android:text="本应用所有数据均来自干货集中营，感谢“代码家”及”干货集中营“所有编辑们的无私奉献。"
                 android:textColor="@android:color/black"
                 android:textSize="16dp" />
 
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="本应用仅限学习交流使用，不可作为商业用途。部分界面参考”drakeet“的”妹子.gank.io“"
+                android:text="本应用仅限学习交流使用，不可作为商业用途。"
                 android:textColor="@android:color/black"
                 android:textSize="16dp" />
 
@@ -137,27 +137,11 @@
                     android:textSize="16dp" />
 
                 <TextView
-                    android:id="@+id/tv_drakeet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/drakeet"
-                    android:textSize="16dp" />
-
-                <TextView
-                    android:id="@+id/tv_meizi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/meizi"
-                    android:textSize="16dp" />
-
-                <TextView
                     android:id="@+id/tv_satan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="@string/my_github"
+                    android:text="@string/satan"
                     android:textSize="16dp" />
 
             </LinearLayout>

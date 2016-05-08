@@ -63,7 +63,7 @@ public class ImageAdapter extends BaseAdapter {
 		ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = inflater.inflate(R.layout.welfare_item, null);
+			convertView = inflater.inflate(R.layout.item_welfare, null);
 			imageView = (ImageView) convertView.findViewById(R.id.imageView);
 			holder.tvTime = (TextView) convertView
 					.findViewById(R.id.girl_tv_time);
