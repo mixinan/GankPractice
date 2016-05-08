@@ -45,7 +45,7 @@ public class RandomFragment extends Fragment implements SwipeRefreshLayout.OnRef
     }
 
 
-    private void initData() {
+    public void initData() {
         mSwipeRefreshLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -53,6 +53,7 @@ public class RandomFragment extends Fragment implements SwipeRefreshLayout.OnRef
                 getData();
             }
         }, 300);
+        mRecyclerView.smoothScrollToPosition(0);
     }
 
 
@@ -103,4 +104,12 @@ public class RandomFragment extends Fragment implements SwipeRefreshLayout.OnRef
     public void onRefresh() {
         getData();
     }
+    
+    /**
+	 * 获取列表控件
+	 * @return
+	 */
+	public RecyclerView getListView(){
+		return mRecyclerView;
+	}
 }

@@ -14,6 +14,15 @@ public class Girl implements Serializable{
 	public Girl() {
 		super();
 	}
+	
+	
+	public Girl(String url, String createdAt) {
+		super();
+		this.url = url;
+		this.createdAt = createdAt;
+	}
+
+
 	public Girl(String who, String url,String createdAt) {
 		super();
 		this.who = who;

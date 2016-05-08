@@ -62,9 +62,4 @@ public class AndroidAdapter extends BaseAdapter {
 		return convertView;
 	}
 	
-	public void reflash(ArrayList<Android> list){
-		data = list;
-		notifyDataSetChanged();
-	}
-
 }

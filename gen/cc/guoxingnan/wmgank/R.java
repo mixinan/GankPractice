@@ -277,16 +277,17 @@ containing a value of this type.
         public static final int tab_bg=0x7f02001d;
         public static final int tab_new=0x7f02001e;
         public static final int title_bar=0x7f02001f;
-        public static final int welfare=0x7f020020;
-        public static final int wujiao=0x7f020021;
-        public static final int wujiao1=0x7f020022;
+        public static final int top=0x7f020020;
+        public static final int welfare=0x7f020021;
+        public static final int wujiao=0x7f020022;
+        public static final int wujiao1=0x7f020023;
     }
     public static final class id {
         public static final int action_about=0x7f050032;
         public static final int action_android=0x7f05002f;
         public static final int action_qq=0x7f050031;
         public static final int action_scan=0x7f050030;
-        public static final int action_welfare=0x7f05002e;
+        public static final int action_top=0x7f05002e;
         public static final int count=0x7f05001d;
         public static final int cv_view=0x7f050028;
         public static final int cv_welfare=0x7f05002b;

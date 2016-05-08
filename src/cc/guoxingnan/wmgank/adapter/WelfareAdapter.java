@@ -98,4 +98,15 @@ public class WelfareAdapter extends RecyclerView.Adapter<WelfareAdapter.ViewHold
 	public void setOnItemClickListener(OnItemClickListener listener){
 		this.listener = listener;
 	}
+	
+	
+	public void addData(int position){
+        data.add(position,new Girl("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1462701019&di=56b0354283aab12a0452dc5811795c51&src=http://www.77mv.com/uploads/allimg/c151025/1445M15H2P40-12224.jpg", "全世界只有一个林志玲"));
+        notifyItemInserted(position);
+    }
+
+    public void removeData(int position){
+        data.remove(position);
+        notifyItemRemoved(position);
+    }
 }

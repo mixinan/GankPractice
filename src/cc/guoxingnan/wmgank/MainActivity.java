@@ -9,6 +9,8 @@ import cc.guoxingnan.wmgank.fragment.AboutFragment;
 import cc.guoxingnan.wmgank.fragment.AndroidFragment;
 import cc.guoxingnan.wmgank.fragment.RandomFragment;
 import cc.guoxingnan.wmgank.fragment.WelfareFragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -94,14 +96,20 @@ public class MainActivity extends FragmentActivity implements OnClickListener, O
 
 		switch (v.getId()) {
 		case R.id.tab_welfare:
+			//当前的Fragment刷新数据
+			currentFragmentRefresh();
 			mTabIndicators.get(0).setIconAlpha(1.0f);
 			mViewPager.setCurrentItem(0,false);
 			break;
 		case R.id.tab_Android:
+			//当前的Fragment刷新数据
+			currentFragmentRefresh();
 			mTabIndicators.get(1).setIconAlpha(1.0f);
 			mViewPager.setCurrentItem(1,false);
 			break;
 		case R.id.tab_random:
+			//当前的Fragment刷新数据
+			currentFragmentRefresh();
 			mTabIndicators.get(2).setIconAlpha(1.0f);
 			mViewPager.setCurrentItem(2,false);
 			break;
@@ -109,6 +117,33 @@ public class MainActivity extends FragmentActivity implements OnClickListener, O
 			mTabIndicators.get(3).setIconAlpha(1.0f);
 			mViewPager.setCurrentItem(3,false);
 			break;
+		}
+	}
+	
+	private void currentFragmentRefresh() {
+		if (mViewPager.getCurrentItem()==0) {
+			WelfareFragment.newInstance().initData();
+		}
+		if (mViewPager.getCurrentItem()==1) {
+			AndroidFragment.newInstance().initData();
+		}
+		if (mViewPager.getCurrentItem()==2) {
+			RandomFragment.newInstance().initData();
+		}
+	}
+
+	/**
+	 * 当前列表滑动到顶部
+	 */
+	private void currentFragmentListViewToTop() {
+		if (mViewPager.getCurrentItem()==0) {
+			WelfareFragment.newInstance().getListView().smoothScrollToPosition(0);
+		}
+		if (mViewPager.getCurrentItem()==1) {
+			AndroidFragment.newInstance().getListView().smoothScrollToPosition(0);
+		}
+		if (mViewPager.getCurrentItem()==2) {
+			RandomFragment.newInstance().getListView().smoothScrollToPosition(0);
 		}
 	}
 
@@ -150,10 +185,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener, O
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		
-		case R.id.action_welfare:
-			mTabIndicators.get(0).setIconAlpha(1.0f);
-			resetTabColor(0);
-			mViewPager.setCurrentItem(0,false);
+		case R.id.action_top:
+			//当前Fragment里的列表滑动到顶部
+			currentFragmentListViewToTop();
 			break;
 			
 		case R.id.action_android:
@@ -168,8 +202,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener, O
 			break;
 			
 		case R.id.action_qq:
-			//	TODO
-			Toast.makeText(this, "聊一聊", Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent();
+			intent.setAction("android.intent.action.VIEW");
+			Uri net = Uri
+					.parse("http://wpd.b.qq.com/cgi/get_m_sign.php?uin=2070906030");
+			intent.setData(net);
+			startActivity(intent);
 			break;
 
 		case R.id.action_about:

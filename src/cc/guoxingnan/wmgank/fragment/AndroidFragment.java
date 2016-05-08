@@ -25,6 +25,8 @@ import cc.guoxingnan.wmgank.adapter.AndroidRecyclerViewAdapter;
 import cc.guoxingnan.wmgank.adapter.AndroidRecyclerViewAdapter.OnItemClickListener;
 import cc.guoxingnan.wmgank.entity.Android;
 import cc.guoxingnan.wmgank.view.SpacesItemDecoration;
+import cc.guoxingnan.wmgank.view.UpRefreshRecyclerView;
+import cc.guoxingnan.wmgank.view.UpRefreshRecyclerView.UpRefreshListener;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
@@ -33,13 +35,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-public class AndroidFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class AndroidFragment extends Fragment implements UpRefreshListener,SwipeRefreshLayout.OnRefreshListener {
 
 	public static final String BASE_URL = "http://gank.io/api/data/Android/20/";
 	private static AndroidFragment mAndroidFragment;
 	private Context mContext;
 	private SwipeRefreshLayout mSwipeRefreshLayout;
-	private RecyclerView mRecyclerView;
+	private UpRefreshRecyclerView mRecyclerView;
 	private ArrayList<Android> data;
 	private AndroidRecyclerViewAdapter adapter;
 	private LayoutManager mLayoutManager;
@@ -61,13 +63,14 @@ public class AndroidFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 
 	private void initView(View view) {
-		mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_android);
+		mRecyclerView = (UpRefreshRecyclerView) view.findViewById(R.id.rv_android);
 		mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_view);
 		mSwipeRefreshLayout.setColorSchemeResources(R.color.red, R.color.blue, R.color.yellow, R.color.green);
-		adapter = new AndroidRecyclerViewAdapter(mContext, data);
 		mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 		mRecyclerView.setLayoutManager(mLayoutManager);
 		
+		data = new ArrayList<Android>();
+		adapter = new AndroidRecyclerViewAdapter(mContext, data);
 		mRecyclerView.setAdapter(adapter);
 		
 		//一些设置
@@ -81,6 +84,7 @@ public class AndroidFragment extends Fragment implements SwipeRefreshLayout.OnRe
 	private void initListener() {
 		
 		mSwipeRefreshLayout.setOnRefreshListener(this);
+		mRecyclerView.setUpRefreshListener(this);
 		
 		adapter.setOnItemClickListener(new OnItemClickListener() {
 
@@ -100,7 +104,7 @@ public class AndroidFragment extends Fragment implements SwipeRefreshLayout.OnRe
 		});
 	}
 
-	private void initData() {
+	public void initData() {
 		mSwipeRefreshLayout.postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -109,11 +113,11 @@ public class AndroidFragment extends Fragment implements SwipeRefreshLayout.OnRe
 				getData(page);
 			}
 		}, 300);
-
+		mRecyclerView.smoothScrollToPosition(0);
 	}
 
 
-	public void getData(int page){
+	public void getData(final int page){
 		RequestQueue mQueue = Volley.newRequestQueue(mContext);
 		StringRequest stringRequest = new StringRequest(BASE_URL+page, 
 				new Listener<String>() {
@@ -121,8 +125,13 @@ public class AndroidFragment extends Fragment implements SwipeRefreshLayout.OnRe
 			@Override
 			public void onResponse(String response) {
 				try {
-					data = jieXi(response);
-					adapter.reflash(data);
+					if (page == 1) {
+						data.clear();
+					}
+					data.addAll(jieXi(response));
+					adapter.notifyDataSetChanged();
+					//取消加载动画
+					mRecyclerView.onRefreshFinish();
 					mSwipeRefreshLayout.setRefreshing(false);
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -170,9 +179,23 @@ public class AndroidFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 	@Override
 	public void onRefresh() {
-		page ++;
+		page = 1;
 		getData(page);
 	}
 
+	/**
+	 * 获取列表控件
+	 * @return
+	 */
+	public RecyclerView getListView(){
+		return mRecyclerView;
+	}
+
+
+	@Override
+	public void onUpRefresh() {
+		page ++;
+		getData(page);
+	}
 
 }

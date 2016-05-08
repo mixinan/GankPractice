@@ -79,8 +79,11 @@ public class WelfareFragment extends Fragment implements UpRefreshListener,Swipe
 
 			@Override
 			public void onItemLongClick(View view, int position) {
-				//TODO 
-				Toast.makeText(mContext, "长按了第 "+(position+1)+" 张图片", Toast.LENGTH_SHORT).show();
+				//替换当前图片为志玲
+				adapter.addData(position);
+				adapter.removeData(position+1);
+//				adapter.notifyDataSetChanged();
+//				Toast.makeText(mContext, "志玲占据了第 "+(position+1)+" 个位置", Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
@@ -101,7 +104,7 @@ public class WelfareFragment extends Fragment implements UpRefreshListener,Swipe
 	}
 
 
-	private void initData() {
+	public void initData() {
 		mSwipeRefreshLayout.postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -109,8 +112,8 @@ public class WelfareFragment extends Fragment implements UpRefreshListener,Swipe
 				page = 1;
 				getData(page);
 			}
-		}, 1000);
-
+		}, 300);
+		mRecyclerView.smoothScrollToPosition(0);
 	}
 
 	private void initListener() {
@@ -185,5 +188,13 @@ public class WelfareFragment extends Fragment implements UpRefreshListener,Swipe
 		mSwipeRefreshLayout.setRefreshing(true);
 		page++;
         getData(page);
+	}
+	
+	/**
+	 * 获取列表控件
+	 * @return
+	 */
+	public UpRefreshRecyclerView getListView(){
+		return mRecyclerView;
 	}
 }
