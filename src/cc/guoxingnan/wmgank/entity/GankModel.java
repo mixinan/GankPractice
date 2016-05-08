@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public class GankModel implements Serializable {
 
-    private String url;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3665990518663716894L;
+	private String url;
     private String type;
     private String desc;
     private String who;
@@ -13,8 +17,18 @@ public class GankModel implements Serializable {
     private String updatedAt;
     private String publishedAt;
     private boolean used;
+    
+    
 
-    public String getPublishedAt() {
+    public GankModel(String url, String desc, String who, String type) {
+		super();
+		this.url = url;
+		this.desc = desc;
+		this.who = who;
+		this.type = type;
+	}
+
+	public String getPublishedAt() {
         return publishedAt;
     }
 

@@ -283,17 +283,16 @@ containing a value of this type.
         public static final int wujiao1=0x7f020023;
     }
     public static final class id {
-        public static final int action_about=0x7f050032;
-        public static final int action_android=0x7f05002f;
-        public static final int action_qq=0x7f050031;
-        public static final int action_scan=0x7f050030;
-        public static final int action_top=0x7f05002e;
+        public static final int action_about=0x7f050031;
+        public static final int action_android=0x7f05002e;
+        public static final int action_qq=0x7f050030;
+        public static final int action_scan=0x7f05002f;
+        public static final int action_top=0x7f05002d;
         public static final int count=0x7f05001d;
-        public static final int cv_view=0x7f050028;
-        public static final int cv_welfare=0x7f05002b;
+        public static final int cv_welfare=0x7f05002a;
         public static final int drawer_layout=0x7f050006;
-        public static final int girl_tv_time=0x7f05002d;
-        public static final int imageView=0x7f05002c;
+        public static final int girl_tv_time=0x7f05002c;
+        public static final int imageView=0x7f05002b;
         /**  ItemTouchHelper uses this id to save a View's original elevation. 
          */
         public static final int item_touch_helper_previous_elevation=0x7f050000;
@@ -302,7 +301,7 @@ containing a value of this type.
         public static final int lv_list=0x7f050018;
         public static final int main_content=0x7f05001a;
         public static final int pb_view=0x7f050008;
-        public static final int rl_other=0x7f050029;
+        public static final int rl_other=0x7f050028;
         public static final int rv_android=0x7f050014;
         public static final int rv_list=0x7f050019;
         public static final int rv_welfare=0x7f05001c;
@@ -316,7 +315,7 @@ containing a value of this type.
         public static final int tabs=0x7f05001b;
         public static final int title_layout=0x7f050025;
         public static final int title_text=0x7f050027;
-        public static final int toolbar=0x7f05002a;
+        public static final int toolbar=0x7f050029;
         public static final int tv_android_item_desc=0x7f05001f;
         public static final int tv_android_item_time=0x7f05001e;
         public static final int tv_app_name=0x7f05000b;

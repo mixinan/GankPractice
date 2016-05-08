@@ -172,8 +172,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener, O
 	public void onPageSelected(int arg0) {
 	}
 
-
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);

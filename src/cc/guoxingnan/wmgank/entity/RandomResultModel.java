@@ -6,7 +6,12 @@ import java.io.Serializable;
 import java.util.List;
 
 public class RandomResultModel implements Serializable {
-    @SerializedName("error")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@SerializedName("error")
     private boolean error;
 
     @SerializedName("results")

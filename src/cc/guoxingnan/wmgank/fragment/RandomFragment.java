@@ -1,6 +1,7 @@
 package cc.guoxingnan.wmgank.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,7 +16,9 @@ import java.util.List;
 import java.util.Random;
 
 import cc.guoxingnan.wmgank.R;
+import cc.guoxingnan.wmgank.WebViewActivity;
 import cc.guoxingnan.wmgank.adapter.RandomAdapter;
+import cc.guoxingnan.wmgank.adapter.RandomAdapter.OnItemClickListener;
 import cc.guoxingnan.wmgank.entity.GankModel;
 import cc.guoxingnan.wmgank.entity.ResultModel;
 import cc.guoxingnan.wmgank.http.GankHttpClient;
@@ -29,8 +32,8 @@ public class RandomFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private static RandomFragment mRandomFragment;
     private Context mContext;
     private RecyclerView mRecyclerView;
-    private List<GankModel> mGankModels;
-    private RandomAdapter mRandomAdapter;
+    private ArrayList<GankModel> mGankModels;
+    private RandomAdapter adapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
@@ -60,16 +63,37 @@ public class RandomFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private void initView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_view);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.red, R.color.blue, R.color.yellow, R.color.green);
+        
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(layoutManager);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.red, R.color.blue, R.color.yellow, R.color.green);
+        
         mGankModels = new ArrayList<GankModel>();
-        mRandomAdapter = new RandomAdapter(mContext, mGankModels, null);
-        mRecyclerView.setAdapter(mRandomAdapter);
+        adapter = new RandomAdapter(mContext, mGankModels, null);
+        mRecyclerView.setAdapter(adapter);
     }
 
     private void initListener() {
         mSwipeRefreshLayout.setOnRefreshListener(this);
+        
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+			
+			@Override
+			public void onItemLongClick(View view, int position) {
+				adapter.addData(position);
+				adapter.removeData(position+1);
+			}
+			
+			@Override
+			public void onItemClick(View view, int position) {
+				GankModel model = mGankModels.get(position);
+				Intent intent = new Intent();
+				intent.putExtra("click", model.getUrl());
+				intent.putExtra("title", model.getDesc());
+				intent.setClass(mContext, WebViewActivity.class);
+				startActivity(intent);
+			}
+		});
     }
 
     public static RandomFragment newInstance() {
@@ -80,16 +104,16 @@ public class RandomFragment extends Fragment implements SwipeRefreshLayout.OnRef
     }
 
     private void getData() {
-        Random random = new Random();
-        int index = random.nextInt(7);
+    	// 取0-7之间的随机数，作为数组下标
+        int index = new Random().nextInt(7);
         final String type = getResources().getStringArray(R.array.type)[index];
         GankHttpClient.getRandomData(type, new Callback<ResultModel>() {
             @Override
             public void success(ResultModel resultModel, Response response) {
                 mGankModels.clear();
                 mGankModels.addAll(resultModel.getResults());
-                mRandomAdapter.setType(type);
-                mRandomAdapter.notifyDataSetChanged();
+                adapter.setType(type);
+                adapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
             }
 

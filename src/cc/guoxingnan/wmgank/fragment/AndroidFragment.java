@@ -21,8 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import cc.guoxingnan.wmgank.R;
 import cc.guoxingnan.wmgank.WebViewActivity;
-import cc.guoxingnan.wmgank.adapter.AndroidRecyclerViewAdapter;
-import cc.guoxingnan.wmgank.adapter.AndroidRecyclerViewAdapter.OnItemClickListener;
+import cc.guoxingnan.wmgank.adapter.AndroidAdapter;
+import cc.guoxingnan.wmgank.adapter.AndroidAdapter.OnItemClickListener;
 import cc.guoxingnan.wmgank.entity.Android;
 import cc.guoxingnan.wmgank.view.SpacesItemDecoration;
 import cc.guoxingnan.wmgank.view.UpRefreshRecyclerView;
@@ -43,7 +43,7 @@ public class AndroidFragment extends Fragment implements UpRefreshListener,Swipe
 	private SwipeRefreshLayout mSwipeRefreshLayout;
 	private UpRefreshRecyclerView mRecyclerView;
 	private ArrayList<Android> data;
-	private AndroidRecyclerViewAdapter adapter;
+	private AndroidAdapter adapter;
 	private LayoutManager mLayoutManager;
 	private int page = 1;
 
@@ -70,7 +70,7 @@ public class AndroidFragment extends Fragment implements UpRefreshListener,Swipe
 		mRecyclerView.setLayoutManager(mLayoutManager);
 		
 		data = new ArrayList<Android>();
-		adapter = new AndroidRecyclerViewAdapter(mContext, data);
+		adapter = new AndroidAdapter(mContext, data);
 		mRecyclerView.setAdapter(adapter);
 		
 		//“ª–©…Ë÷√
